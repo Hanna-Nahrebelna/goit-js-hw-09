@@ -1,6 +1,7 @@
 import SimpleLightbox from "simplelightbox";
 import "simplelightbox/dist/simple-lightbox.min.css";
 
+
 const images = [
 {
     preview:
@@ -66,39 +67,58 @@ const images = [
 },
 ];
 
-const galleryRef = document.querySelector('.gallery');
+document.addEventListener('DOMContentLoaded', function () {
+  const gallery = new SimpleLightbox('.gallery-link', {
+  overlay: true,
+  spinner: true,
+  spinnerColor: '#ffffff',
+  captionDelay: 0,
+  close: true,
+  showCounter: true,
+  captionsData: 'title',
+  captionPosition: 'bottom',
+  disableRightClick: true,
+  alertErrorMessage: 'The requested content cannot be loaded. Please try again later.',
+  disableScroll: true,
+  alertAutoClose: false
+  });
+});
 
-const lightbox = new SimpleLightbox('.gallery a', {});
+const galleryRef = document.querySelector('.gallery');
 
 galleryRef.addEventListener('click', handleGalleryClick);
 
 function handleGalleryClick(event) {
   event.preventDefault();
 
-  if (event.target.nodeName === 'IMG') {
-    const largeImageSrc = event.target.dataset.source;
+  const imageLink = event.target.closest('.gallery-link');
+  if (!imageLink) return; // якщо клік не на зображенні, виходимо з функції
+  
+  const anchorElement = imageLink.querySelector('a');
+  if (!anchorElement) return;
+
+  const largeImageSrc = anchorElement.getAttribute('href');    
 
     // Створення екземпляру SimpleLightbox з великим зображенням
-    const lightbox = new SimpleLightbox(largeImageSrc);
+  const lightbox = new SimpleLightbox(largeImageSrc);
     // Показати модальне вікно
-    lightbox.show();
-  }
+  lightbox.show();
 }
 
 // Окремо розмітка галереї
   const imagesMarkup = images
     .map(({ preview, original, description }) => `
   <li class="gallery-item">
-    <a class="gallery-link" href="large-image.jpg">
+    <a class="gallery-link" href="${original}">
       <img
       class="gallery-image"
-      src="small-image.jpg" 
+      src="${preview}" 
       data-source="${original}" 
-      alt="Image description" 
+      alt="${description}" 
       />
     </a>
   </li>`)
     .join('');
 
 galleryRef.insertAdjacentHTML('beforeend', imagesMarkup);
-  
+
