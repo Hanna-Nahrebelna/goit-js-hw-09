@@ -27,6 +27,12 @@ ul {
   list-style: none;
 }
 
+.gallery {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+
 .gallery-item {
   flex: 1 0 auto;
   max-width: calc(30% - 10px);
