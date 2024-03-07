@@ -84,23 +84,26 @@ document.addEventListener('DOMContentLoaded', function () {
   });
 });
 
-const galleryRef = document.querySelector('.gallery');
+
+const galleryRef = document.querySelector('.gallery-list');
 
 galleryRef.addEventListener('click', handleGalleryClick);
 
 function handleGalleryClick(event) {
   event.preventDefault();
 
-  const imageLink = event.target.closest('.gallery-link');
+  const imageLink = event.target.closest('.gallery-item');
   if (!imageLink) return; // якщо клік не на зображенні, виходимо з функції
   
   const anchorElement = imageLink.querySelector('a');
-  if (!anchorElement) return;
+  if (!anchorElement) return; // якщо посилання не знайдено, виходимо з функції
 
   const largeImageSrc = anchorElement.getAttribute('href');    
+  
 
-    // Створення екземпляру SimpleLightbox з великим зображенням
-  const lightbox = new SimpleLightbox(largeImageSrc);
+  // Створення екземпляру SimpleLightbox з великим зображенням
+  const lightbox = new SimpleLightbox('.gallery-link');
+
     // Показати модальне вікно
   lightbox.show();
 }
