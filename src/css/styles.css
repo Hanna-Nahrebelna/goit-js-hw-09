@@ -13,14 +13,13 @@
   font-size: 16px;
   line-height: 24px;
   font-weight: 400;
-
   color: #242424;
   background-color: rgba(255, 255, 255, 0.87);
-
   font-synthesis: none;
   text-rendering: optimizeLegibility;  
 }
 
+/* СТИЛІ ДЛЯ ГАЛЕРЕЇ ЗОБРАЖЕНЬ */
 ul {
   margin: 0;
   padding: 0;
@@ -52,72 +51,77 @@ ul {
   opacity: 0.8;
 }
 
-
-.feedback-form {  
+/* СТИЛІ ДЛЯ ФОРМИ */
+form {
+  display: block;
+  flex-direction: column;
+  gap: 12px;
   margin-left: auto;
   margin-right: auto;
   padding: 24px;
   width: 408px;
-  height: 296px;
-  border-radius: 8px;
-  font-size: 16px;
+  height: 296px;  
+  border-radius: 8px;  
   background-color: #FFFFFF;
 }
 
-.feedback-form label {
-  display: block; 
-  color: #2E2F42;
+form label {
+  font-size: 16px;
+  font-family: Montserrat, sans-serif;
+  color: #2E2F42;  
 }
 
-.feedback-form input {
-  display: block;
+/* Стилі Форми при введенні */
+form input {
   width: 360px;
   height: 40px;  
   border-width: 1px;
-  border-radius: 5px;
+  border-radius: 5px;  
   color: #2E2F42;
   border-color: #808080;
 }
 
-/* Стилізація для введень (inputs) */
-
-.form input[type="email"],
-.form textarea {
-  /* Додайте кольори тексту і фону */
-  color: #333;
-  background-color: #f8f8f8;
-
-  /* Змініть розмір текстових елементів */
+form input[type="email"],
+form textarea {
+  width: 360px;
   font-size: 14px;
-
-  /* Додайте внутрішні відступи */
   padding: 8px;
-
-  /* Змініть вигляд рамки */
-  border: 1px solid #ccc;
-  border-radius: 4px;
-
-  /* Змініть зовнішній вигляд при фокусі */
   outline: none;
-  box-shadow: 0 0 3px #007bff;
-  /* Приклад тіні при фокусі */
+  border-radius: 4px;  
+  background-color: #f8f8f8;
 }
 
-/* Стилі для введення при фокусі */
-.form input[type="email"]:focus,
-.form textarea:focus {
-  border-color: #007bff;
-  /* Зміна кольору рамки при фокусі */
+form input[type="email"] {
+  height: 40px;
+  margin-bottom: 8px;
 }
 
-.feedback-form button {
+form textarea {
+  height: 80px;
+  resize: none; /* Щоб користувач не міг змінити розмір */
+  box-shadow: none;
+}
+
+/* Стилі для Форми при фокусі */
+form input[type="email"]:hover {
+  border-color: #000000; 
+}
+
+form button {
   margin-top: 16px;
   width: 86px;
   height: 40px;
   border: none;
   border-radius: 8px;
+  font-family: Montserrat, sans-serif;
+  font-size: 16px;
   color: #FFFFFF;
   background-color: #4E75FF;
+}
+
+form button[type="submit"]:hover {
+  background-color: #6C8CFF;
+  opacity: 0.8;
 }
 
 
