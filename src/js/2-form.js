@@ -1,56 +1,45 @@
-const form = document.querySelector('.feedback-form');
-const emailInput = form.querySelector('input[type="email"]');
-const messageInput = form.querySelector('textarea[name="message"]');
+document.addEventListener('DOMContentLoaded', function() {
+    const form = document.querySelector('.feedback-form');
 
+    // Функція для збереження даних у локальне сховище
+    function saveToLocalStorage() {
+        const formData = {
+            email: form.elements.email.value.trim(),
+            message: form.elements.message.value.trim()
+        };
+        localStorage.setItem('feedback-form-state', JSON.stringify(formData));
+    }
 
-// Зберігаємо дані форми в локальне сховище
-const updateFormData = () => {
-  const formData = {
-    email: emailInput.value.trim(),
-    message: messageInput.value.trim(),
-  };
-  localStorage.setItem('feedback-form-state', JSON.stringify(formData));
-};
+    // Функція для заповнення форми даними з локального сховища
+    function fillFormFromLocalStorage() {
+        const savedData = localStorage.getItem('feedback-form-state');
+        if (savedData) {
+            const formData = JSON.parse(savedData);
+            form.elements.email.value = formData.email;
+            form.elements.message.value = formData.message;
+        }
+    }
 
-// Відстежуємо зміни в полях форми
-form.addEventListener('input', updateFormData);
+    // Під час завантаження сторінки заповнюємо форму даними з локального сховища
+    fillFormFromLocalStorage();
 
-// Оновлюємо форму даними з локального сховища
-const loadFormData = () => {
-  const savedState = JSON.parse(localStorage.getItem('feedback-form-state'));
-  if (savedState) {
-    emailInput.value = savedState.email;
-    messageInput.value = savedState.message;
-  }
-};
+    // Відслідковуємо подію input на формі та зберігаємо дані в локальне сховище
+    form.addEventListener('input', saveToLocalStorage);
 
-// Очищаємо форму та локальне сховище
-const clearForm = () => {
-  emailInput.value = '';
-  messageInput.value = '';
-  localStorage.removeItem('feedback-form-state');
-};
+    // Під час відправлення форми виводимо дані в консоль та очищуємо локальне сховище та поля форми
+    form.addEventListener('submit', function(event) {
+        event.preventDefault(); // Попереджаємо стандартне повернення форми
 
-// Обробка сабміту форми
-form.addEventListener('submit', (event) => {
-  event.preventDefault();
+        const email = form.elements.email.value.trim();
+        const message = form.elements.message.value.trim();
 
-  // Перевірка заповнення полів
-  if (!emailInput.value.trim() && !messageInput.value.trim()) {
-    alert('Please fill in all required fields');
-    return;
-  }
-
-  // Виводимо дані форми в консоль
-  const formData = {
-    email: emailInput.value.trim(),
-    message: messageInput.value.trim(),
-  };
-  console.log(formData);
-
-  // Очищаємо форму та локальне сховище
-  clearForm();
+        if (email === '' || message === '') {
+        alert('Будь ласка, заповніть всі поля.');
+        event.preventDefault(); // Перестаємо відправку форми, якщо хоча б одне поле порожнє
+        } else {
+        console.log({ email, message });
+        localStorage.removeItem('feedback-form-state');
+        form.reset();
+        }
+    });
 });
-
-// Завантаження даних з локального сховища при завантаженні сторінки
-window.addEventListener('load', loadFormData);
