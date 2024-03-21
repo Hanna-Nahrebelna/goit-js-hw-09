@@ -1,7 +1,3 @@
-import SimpleLightbox from "simple-lightbox";
-import 'simple-lightbox/dist/simple-lightbox.min.css';
-
-
 const images = [
 {
     preview:
