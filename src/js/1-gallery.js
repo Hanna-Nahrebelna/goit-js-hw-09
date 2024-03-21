@@ -1,5 +1,5 @@
-import SimpleLightbox from "simplelightbox";
-import "simplelightbox/dist/simple-lightbox.min.css";
+import SimpleLightbox from "simple-lightbox";
+import 'simple-lightbox/dist/simple-lightbox.min.css';
 
 
 const images = [
@@ -67,8 +67,9 @@ const images = [
 },
 ];
 
+
 document.addEventListener('DOMContentLoaded', function () {
-  const gallery = new SimpleLightbox('.gallery-link', {
+  let gallery = new SimpleLightbox('.gallery-link a', {
   overlay: true,
   spinner: true,
   spinnerColor: '#ffffff',
@@ -95,14 +96,14 @@ function handleGalleryClick(event) {
   const imageLink = event.target.closest('.gallery-item');
   if (!imageLink) return; // якщо клік не на зображенні, виходимо з функції
   
-  const anchorElement = imageLink.querySelector('a');
-  if (!anchorElement) return; // якщо посилання не знайдено, виходимо з функції
+ const anchorElement = imageLink.querySelector('a');
+ if (!anchorElement) return; // якщо посилання не знайдено, виходимо з функції
 
-  const largeImageSrc = anchorElement.getAttribute('href');    
+  const largeImageSrc = imageLink.getAttribute('href');    
   
 
   // Створення екземпляру SimpleLightbox з великим зображенням
-  const lightbox = new SimpleLightbox('.gallery-link');
+  const lightbox = new SimpleLightbox('.gallery-link a');
 
     // Показати модальне вікно
   lightbox.show();
@@ -118,7 +119,7 @@ function handleGalleryClick(event) {
       src="${preview}" 
       data-source="${original}" 
       alt="${description}" 
-      />
+      />      
     </a>
   </li>`)
     .join('');
