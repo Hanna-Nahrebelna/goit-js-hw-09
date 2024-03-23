@@ -1,3 +1,6 @@
+import SimpleLightbox from "simplelightbox";
+import "simplelightbox/dist/simple-lightbox.min.css";
+
 const images = [
 {
     preview:
@@ -65,7 +68,7 @@ const images = [
 
 
 document.addEventListener('DOMContentLoaded', function () {
-  let gallery = new SimpleLightbox('.gallery-link a', {
+  const gallery = new SimpleLightbox('.gallery-item a', {
   overlay: true,
   spinner: true,
   spinnerColor: '#ffffff',
@@ -86,10 +89,11 @@ const galleryRef = document.querySelector('.gallery-list');
 
 galleryRef.addEventListener('click', handleGalleryClick);
 
+
 function handleGalleryClick(event) {
   event.preventDefault();
 
-  const imageLink = event.target.closest('.gallery-item');
+const imageLink = event.target.closest('.gallery-link');
   if (!imageLink) return; // якщо клік не на зображенні, виходимо з функції
   
  const anchorElement = imageLink.querySelector('a');
@@ -104,6 +108,7 @@ function handleGalleryClick(event) {
     // Показати модальне вікно
   lightbox.show();
 }
+
 
 // Окремо розмітка галереї
   const imagesMarkup = images
