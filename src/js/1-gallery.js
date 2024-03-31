@@ -71,7 +71,7 @@ document.addEventListener('DOMContentLoaded', function () {
   const gallery = new SimpleLightbox('.gallery-list', {
   overlay: true,
   spinner: true,
-  captionDelay: 250ms,
+  captionDelay: 250,
   close: true,
   showCounter: true,
   captionsData: 'alt',
