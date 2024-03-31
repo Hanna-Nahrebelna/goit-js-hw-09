@@ -83,7 +83,7 @@ document.addEventListener('DOMContentLoaded', function () {
 });
 
 
-const gallery = document.querySelector('.gallery-list');
+const gallery = document.querySelector('.gallery');
 
 gallery.addEventListener('click', handleGalleryClick);
 
@@ -108,7 +108,6 @@ function handleGalleryClick(event) {
       <img
       class="gallery-image"
       src="${preview}" 
-      data-source="${original}" 
       alt="${description}" 
       />      
     </a>
