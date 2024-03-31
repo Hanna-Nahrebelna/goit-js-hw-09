@@ -34,8 +34,7 @@ document.addEventListener('DOMContentLoaded', function() {
         const message = form.elements.message.value.trim();
 
         if (email === '' || message === '') {
-        alert('Будь ласка, заповніть всі поля.');
-        event.preventDefault(); // Перестаємо відправку форми, якщо хоча б одне поле порожнє
+        alert('Please fill in all fields.');        
         } else {
         console.log({ email, message });
         localStorage.removeItem('feedback-form-state');
