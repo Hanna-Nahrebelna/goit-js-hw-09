@@ -68,40 +68,30 @@ const images = [
 
 
 document.addEventListener('DOMContentLoaded', function () {
-  const gallery = new SimpleLightbox('.gallery-item a', {
+  const gallery = new SimpleLightbox('.gallery-list', {
   overlay: true,
   spinner: true,
-  spinnerColor: '#ffffff',
-  captionDelay: 0,
+  captionDelay: 250ms,
   close: true,
   showCounter: true,
-  captionsData: 'title',
+  captionsData: 'alt',
   captionPosition: 'bottom',
   disableRightClick: true,
-  alertErrorMessage: 'The requested content cannot be loaded. Please try again later.',
-  disableScroll: true,
-  alertAutoClose: false
+  alertErrorMessage: 'Image not found, next image will be loaded',
+  disableScroll: true  
   });
 });
 
 
-const galleryRef = document.querySelector('.gallery-list');
+const gallery = document.querySelector('.gallery-list');
 
-galleryRef.addEventListener('click', handleGalleryClick);
-
+gallery.addEventListener('click', handleGalleryClick);
 
 function handleGalleryClick(event) {
   event.preventDefault();
 
-const imageLink = event.target.closest('.gallery-link');
-  if (!imageLink) return; // якщо клік не на зображенні, виходимо з функції
-  
- const anchorElement = imageLink.querySelector('a');
- if (!anchorElement) return; // якщо посилання не знайдено, виходимо з функції
-
   const largeImageSrc = imageLink.getAttribute('href');    
   
-
   // Створення екземпляру SimpleLightbox з великим зображенням
   const lightbox = new SimpleLightbox('.gallery-link a');
 
@@ -125,5 +115,5 @@ const imageLink = event.target.closest('.gallery-link');
   </li>`)
     .join('');
 
-galleryRef.insertAdjacentHTML('beforeend', imagesMarkup);
+gallery.insertAdjacentHTML('beforeend', imagesMarkup);
 
