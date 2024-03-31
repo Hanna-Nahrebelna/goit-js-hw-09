@@ -68,31 +68,19 @@ const images = [
 
 
 document.addEventListener('DOMContentLoaded', function () {
-  const gallery = new SimpleLightbox('.gallery-list', {
-  overlay: true,
-  spinner: true,
-  captionDelay: 250,
-  close: true,
-  showCounter: true,
-  captionsData: 'alt',
-  captionPosition: 'bottom',
-  disableRightClick: true,
-  alertErrorMessage: 'Image not found, next image will be loaded',
-  disableScroll: true  
-  });
-});
+  const galleryList = document.querySelector('.gallery-list');
 
-
-const gallery = document.querySelector('.gallery');
-
-gallery.addEventListener('click', handleGalleryClick);
+galleryList.addEventListener('click', handleGalleryClick);
 
 function handleGalleryClick(event) {
   event.preventDefault();
 
-  const largeImageSrc = imageLink.getAttribute('href');    
+  const imageLink = event.target.closest('.gallery-link');
+  if (!imageLink) return;
+
+  const largeImageSrc = imageLink.getAttribute('href');
   
-  // Створення екземпляру SimpleLightbox з великим зображенням
+    // Створення екземпляру SimpleLightbox з великим зображенням
   const lightbox = new SimpleLightbox('.gallery-link a');
 
     // Показати модальне вікно
@@ -100,7 +88,7 @@ function handleGalleryClick(event) {
 }
 
 
-// Окремо розмітка галереї
+  // Окремо розмітка галереї
   const imagesMarkup = images
     .map(({ preview, original, description }) => `
   <li class="gallery-item">
@@ -114,5 +102,23 @@ function handleGalleryClick(event) {
   </li>`)
     .join('');
 
-gallery.insertAdjacentHTML('beforeend', imagesMarkup);
+  gallery.insertAdjacentHTML('afterbegin', imagesMarkup);
+
+  const gallery = new SimpleLightbox('.gallery-list', {
+  overlay: true,
+  spinner: true,
+  captionDelay: 250,
+  close: true,
+  showCounter: true,
+  captionsData: 'alt',
+  captionPosition: 'bottom',
+  disableRightClick: true,
+  alertErrorMessage: 'Image not found, next image will be loaded',
+  disableScroll: true  
+  });
+
+});
+
+
+
 
